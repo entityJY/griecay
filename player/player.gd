@@ -37,4 +37,4 @@ func _physics_process(delta: float) -> void:
 	apply_central_force(force_3d * mass)
 
 	if Input.is_action_just_pressed("jump") and grounded:
-		apply_central_impulse(Vector3(0.0, JUMP_IMPULSE, 0.0))
+		apply_central_impulse(Vector3(0.0, JUMP_IMPULSE * mass, 0.0))
