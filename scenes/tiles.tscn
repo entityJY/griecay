@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://brx160r6hot4f"]
+
+[ext_resource type="Script" uid="uid://c5i7am0gfs73p" path="res://scenes/tiles.gd" id="1_od8sr"]
+
+[node name="Tiles" type="Node3D" unique_id=478190446]
+script = ExtResource("1_od8sr")
+hex_model = "uid://biewu07hgmrly"
