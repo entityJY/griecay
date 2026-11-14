@@ -3,10 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://brx160r6hot4f" path="res://scenes/tiles.tscn" id="1_4xfga"]
 [ext_resource type="PackedScene" uid="uid://d1vx7w8xhf6ou" path="res://player/player.tscn" id="2_paxxb"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pr5yw"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pr5yw"]
-
 [node name="Map" type="Node3D" unique_id=1947027435]
 
 [node name="Tiles" parent="." unique_id=478190446 instance=ExtResource("1_4xfga")]
@@ -19,16 +15,3 @@ size = 27.168
 
 [node name="Player" parent="." unique_id=1553416751 instance=ExtResource("2_paxxb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.682129, 0)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=108615465]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.671692, 4.044464, 0)
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-mass = 5.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=2086500836]
-shape = SubResource("CapsuleShape3D_pr5yw")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=340449650]
-mesh = SubResource("CapsuleMesh_pr5yw")
