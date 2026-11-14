@@ -22,7 +22,6 @@ axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_paxxb")
 gravity_scale = 2.0
 script = ExtResource("1_rkbax")
-JUMP_IMPULSE = 10.0
 PID_CONSTANTS = Vector3(30, 0, 0.2)
 grounded_marker = NodePath("Grounded")
 
