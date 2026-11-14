@@ -15,6 +15,11 @@ gradient = SubResource("Gradient_kqu6x")
 width = 96
 height = 192
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_oul6g"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Player" type="RigidBody3D" unique_id=1553416751 node_paths=PackedStringArray("grounded_marker")]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -34,3 +39,6 @@ texture = SubResource("GradientTexture2D_oul6g")
 [node name="Grounded" type="RayCast3D" parent="." unique_id=1050679996]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.93863153, 0)
 target_position = Vector3(0, -0.15, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1656757232]
+replication_config = SubResource("SceneReplicationConfig_oul6g")

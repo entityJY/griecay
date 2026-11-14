@@ -15,11 +15,16 @@ var pid = Pid2D.new()
 var grounded: bool = true
 
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
+
 func _ready() -> void:
 	pid.update_constants(PID_CONSTANTS.x, PID_CONSTANTS.y, PID_CONSTANTS.z)
 
 
 func _physics_process(delta: float) -> void:
+	if !is_multiplayer_authority(): return
 
 	grounded = grounded_marker.is_colliding()
 

@@ -2,16 +2,26 @@
 
 [ext_resource type="PackedScene" uid="uid://brx160r6hot4f" path="res://scenes/tiles.tscn" id="1_4xfga"]
 [ext_resource type="PackedScene" uid="uid://d1vx7w8xhf6ou" path="res://player/player.tscn" id="2_paxxb"]
+[ext_resource type="PackedScene" uid="uid://cidiygumf8a8x" path="res://ui/multiplayer_ui/high_level_ui.tscn" id="3_gldc4"]
+[ext_resource type="Script" uid="uid://itrkgxdyvug7" path="res://scripts/multiplayer_spawner.gd" id="4_0cso3"]
 
 [node name="Map" type="Node3D" unique_id=1947027435]
 
 [node name="Tiles" parent="." unique_id=478190446 instance=ExtResource("1_4xfga")]
 initial_radius = 10
 
+[node name="Players" type="Node3D" parent="." unique_id=310138321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5357056, 0)
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=197334690]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 10, 8.401003)
 projection = 1
 size = 27.168
 
-[node name="Player" parent="." unique_id=1553416751 instance=ExtResource("2_paxxb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.682129, 0)
+[node name="HighLevelUi" parent="." unique_id=779017857 instance=ExtResource("3_gldc4")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=384066555]
+_spawnable_scenes = PackedStringArray("uid://d1vx7w8xhf6ou")
+spawn_path = NodePath("../Players")
+script = ExtResource("4_0cso3")
+network_player = ExtResource("2_paxxb")
