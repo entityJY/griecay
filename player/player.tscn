@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://d1vx7w8xhf6ou"]
+
+[ext_resource type="Script" uid="uid://bltatkujanb44" path="res://player/player.gd" id="1_rkbax"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_paxxb"]
+friction = 0.1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pr5yw"]
+
+[sub_resource type="Gradient" id="Gradient_kqu6x"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oul6g"]
+gradient = SubResource("Gradient_kqu6x")
+width = 96
+height = 192
+
+[node name="Player" type="RigidBody3D" unique_id=1553416751 node_paths=PackedStringArray("grounded_marker")]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_paxxb")
+gravity_scale = 2.0
+script = ExtResource("1_rkbax")
+JUMP_IMPULSE = 10.0
+PID_CONSTANTS = Vector3(30, 0, 0.2)
+grounded_marker = NodePath("Grounded")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1062491462]
+shape = SubResource("CapsuleShape3D_pr5yw")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1944506811]
+texture = SubResource("GradientTexture2D_oul6g")
+
+[node name="Grounded" type="RayCast3D" parent="." unique_id=1050679996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.93863153, 0)
+target_position = Vector3(0, -0.15, 0)
