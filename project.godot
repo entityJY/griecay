@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-HighLevelNetworkHandler="*uid://c8fgkl3nwdvjh"
+MultiplayerHandler="*uid://boao2xb2sxdy5"
 
 [display]
 
@@ -26,7 +26,7 @@ window/size/viewport_height=1080
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/tube/plugin.cfg")
 
 [input]
 
@@ -60,3 +60,8 @@ attack={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[steam]
+
+initialization/app_data/app_id=480
+initialization/processes/initialize_on_startup=true

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://boao2xb2sxdy5"]
+
+[ext_resource type="Script" uid="uid://c8fgkl3nwdvjh" path="res://multiplayer_handler/high_level_network_handler.gd" id="1_s5nbk"]
+[ext_resource type="Script" uid="uid://cy006uvidc4y" path="res://addons/tube/tube_client.gd" id="3_0ojbl"]
+[ext_resource type="Resource" uid="uid://beslixo1ns5lg" path="res://tube_context.tres" id="4_pv4wa"]
+
+[node name="MultiplayerHandler" type="Node" unique_id=1784131554 node_paths=PackedStringArray("tube_client")]
+script = ExtResource("1_s5nbk")
+tube_client = NodePath("TubeClient")
+
+[node name="TubeClient" type="Node" parent="." unique_id=1921835823]
+script = ExtResource("3_0ojbl")
+context = ExtResource("4_pv4wa")
+metadata/_custom_type_script = "uid://cy006uvidc4y"
