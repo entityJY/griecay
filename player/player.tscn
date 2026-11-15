@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bltatkujanb44" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="SpriteFrames" uid="uid://gsgcrkaj8ctt" path="res://player/attack_anim.aseprite" id="2_rkbax"]
+[ext_resource type="FontFile" uid="uid://dkectsfpmvfa7" path="res://fonts/Radis Sans.otf" id="3_g1dw6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_paxxb"]
 friction = 0.1
@@ -142,7 +143,7 @@ _data = {
 &"attack": SubResource("Animation_rkbax")
 }
 
-[node name="Player" type="RigidBody3D" unique_id=1553416751 node_paths=PackedStringArray("grounded_marker", "shadow", "shadow_raycast", "animation_player")]
+[node name="Player" type="RigidBody3D" unique_id=1553416751 node_paths=PackedStringArray("grounded_marker", "shadow", "shadow_raycast", "animation_player", "username")]
 collision_layer = 4
 collision_mask = 5
 axis_lock_angular_x = true
@@ -151,12 +152,12 @@ axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_paxxb")
 gravity_scale = 2.0
 script = ExtResource("1_rkbax")
-JUMP_FORCE = 320.0
 PID_CONSTANTS = Vector3(30, 0, 0.2)
 grounded_marker = NodePath("Grounded")
 shadow = NodePath("ShadowStuff/Shadow")
 shadow_raycast = NodePath("ShadowStuff/ShadowRaycast")
 animation_player = NodePath("AnimationPlayer")
+username = NodePath("Username")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1062491462]
 shape = SubResource("CapsuleShape3D_pr5yw")
@@ -204,5 +205,13 @@ replication_config = SubResource("SceneReplicationConfig_oul6g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1211834219]
 libraries/ = SubResource("AnimationLibrary_g1dw6")
+
+[node name="Username" type="Label3D" parent="." unique_id=224685821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8085327, 0)
+billboard = 1
+text = "username"
+font = ExtResource("3_g1dw6")
+font_size = 160
+outline_size = 32
 
 [connection signal="body_entered" from="Attack/Area3D" to="." method="_on_area_3d_body_entered"]

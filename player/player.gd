@@ -14,6 +14,7 @@ class_name Player
 @export var shadow: Sprite3D
 @export var shadow_raycast: RayCast3D
 @export var animation_player: AnimationPlayer
+@export var username: Label3D
 
 var pid = Pid2D.new()
 
@@ -32,6 +33,9 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	pid.update_constants(PID_CONSTANTS.x, PID_CONSTANTS.y, PID_CONSTANTS.z)
 	gravity = gravity_scale
+
+	update_username_label(PlayerData.username)
+	PlayerData.username_changed.connect(update_username_label)
 
 
 func _physics_process(delta: float) -> void:
@@ -68,6 +72,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		shadow.visible = false
 
+func update_username_label(new_name: String) -> void:
+	username.text = new_name
 
 @rpc("any_peer", "call_local", "reliable")
 func apply_teleport(target_pos: Vector3) -> void:
