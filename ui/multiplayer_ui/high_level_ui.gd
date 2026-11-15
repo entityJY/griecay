@@ -20,3 +20,7 @@ func _on_quit_pressed() -> void:
 
 func _on_session_id_pressed() -> void:
 	DisplayServer.clipboard_set(session_id_button.text)
+
+
+func _on_line_edit_text_changed(new_text: String) -> void:
+	PlayerData.username = new_text

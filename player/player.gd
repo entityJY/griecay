@@ -26,6 +26,7 @@ var gravity = 0.0
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
+	PlayerData.set_multiplayer_authority(name.to_int())
 
 
 func _ready() -> void:
@@ -69,31 +70,35 @@ func _physics_process(delta: float) -> void:
 
 
 @rpc("any_peer", "call_local", "reliable")
-func apply_teleport(target_pos: Vector3):
-	prints(multiplayer.get_unique_id(), "apply_teleport", get_multiplayer_authority(), multiplayer.get_remote_sender_id(), target_pos)
+func apply_teleport(target_pos: Vector3) -> void:
+	# prints(multiplayer.get_unique_id(), "apply_teleport", get_multiplayer_authority(), multiplayer.get_remote_sender_id(), target_pos)
 	global_position = target_pos
 
 @rpc("any_peer", "call_local", "reliable")
-func apply_impulse_to(impulse: Vector3):
+func apply_impulse_to(impulse: Vector3) -> void:
 	apply_central_impulse(impulse)
 
 @rpc("any_peer", "call_local", "reliable")
-func disable_gravity():
+func disable_gravity() -> void:
 	gravity_scale = 0.0
 	var stop_velocity = func(): linear_velocity.y = 0.0
 	stop_velocity.call_deferred()
 
 @rpc("any_peer", "call_local", "reliable")
-func enable_gravity():
+func enable_gravity() -> void:
 	gravity_scale = gravity
 
 @rpc("any_peer", "call_local", "reliable")
-func disable_movement():
+func disable_movement() -> void:
 	can_move = false
 
 @rpc("any_peer", "call_local", "reliable")
-func enable_movement():
+func enable_movement() -> void:
 	can_move = true
+
+@rpc("any_peer", "call_local", "reliable")
+func stop_movement() -> void:
+	linear_velocity = Vector3.ZERO
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

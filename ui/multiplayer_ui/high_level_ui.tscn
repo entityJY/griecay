@@ -9,44 +9,72 @@ Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("2_cbblj")
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("2_cbblj")
+LineEdit/font_sizes/font_size = 32
+LineEdit/fonts/font = ExtResource("2_cbblj")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_pr5yw"]
+color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+grow_begin = 10.0
+grow_end = 10.0
+thickness = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvtjh"]
-bg_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 
 [node name="HighLevelUi" type="CanvasLayer" unique_id=763348940 node_paths=PackedStringArray("session_id_button", "input_session_id")]
 script = ExtResource("1_nvtjh")
-session_id_button = NodePath("MarginContainer/VBoxContainer/SessionID")
-input_session_id = NodePath("MarginContainer/VBoxContainer/JoinSessionID")
+session_id_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/SessionID")
+input_session_id = NodePath("PanelContainer/MarginContainer/VBoxContainer/JoinSessionID")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1103238524]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=885615338]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 280.0
+offset_bottom = 354.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1103238524]
 custom_minimum_size = Vector2(300, 0)
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 focus_mode = 1
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2051655689]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2051655689]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme = SubResource("Theme_mxk8o")
 theme_override_constants/separation = 16
 
-[node name="SessionID" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1579250358]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=988769788]
+layout_mode = 2
+placeholder_text = "Username"
+alignment = 1
+script = ExtResource("2_uf0np")
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=409807618]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_pr5yw")
+
+[node name="SessionID" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1579250358]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 tooltip_text = "Press to copy session code"
 focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_nvtjh")
+text = "Lobby ID"
 
-[node name="CreateLobby" type="Button" parent="MarginContainer/VBoxContainer" unique_id=583428171]
+[node name="CreateLobby" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=583428171]
 layout_mode = 2
 focus_mode = 0
 text = "Create Lobby"
 
-[node name="JoinSessionID" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=88985796]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1255754755]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_pr5yw")
+
+[node name="JoinSessionID" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=88985796]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 focus_mode = 1
@@ -56,17 +84,22 @@ placeholder_text = "Enter Code"
 alignment = 1
 script = ExtResource("2_uf0np")
 
-[node name="Client" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1255092702]
+[node name="Client" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1255092702]
 layout_mode = 2
 focus_mode = 0
 text = "Join Lobby"
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1357654742]
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1534450986]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_pr5yw")
+
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1357654742]
 layout_mode = 2
 focus_mode = 0
 text = "Quit Lobby"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/SessionID" to="." method="_on_session_id_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/CreateLobby" to="." method="_on_server_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Client" to="." method="_on_client_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="text_submitted" from="PanelContainer/MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/SessionID" to="." method="_on_session_id_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CreateLobby" to="." method="_on_server_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Client" to="." method="_on_client_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

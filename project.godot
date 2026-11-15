@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 MultiplayerHandler="*uid://boao2xb2sxdy5"
+PlayerData="*uid://b6y0wweas3p3c"
 
 [display]
 

@@ -11,12 +11,18 @@ signal countdown_finished()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	MultiplayerHandler.tube_client.session_created.connect(enable_start_button)
+	MultiplayerHandler.tube_client.session_created.connect(check_start_button)
+	MultiplayerHandler.tube_client.peer_connected.connect(check_start_button)
+	MultiplayerHandler.tube_client.peer_disconnected.connect(check_start_button)
 
 
-func enable_start_button() -> void:
-	if multiplayer.is_server():
+func check_start_button(_id = 0) -> void:
+	if !multiplayer.is_server(): return
+	if multiplayer.get_peers().size() < 1:
+		start_game_button.visible = false
+	else:
 		start_game_button.visible = true
+
 
 func start_countdown() -> void:
 	start_game_button.visible = false
@@ -37,3 +43,8 @@ func start_countdown() -> void:
 func _on_button_pressed() -> void:
 	start_game.emit()
 	start_countdown()
+
+
+func _on_map_game_over() -> void:
+	if multiplayer.is_server():
+		start_game_button.visible = true
