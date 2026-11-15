@@ -3,19 +3,23 @@ class_name Player
 
 
 @export var TARGET_SPEED: float = 5.0
-@export var JUMP_IMPULSE: float = 10.0
+@export var JUMP_FORCE: float = 10.0
 @export var MAX_FORCE: float = 40.0
 @export var PID_CONSTANTS: Vector3 = Vector3(1.0, 0.0, 0.0)
+@export var attack_cooldown: float = 1.0
+@export var knockback_impulse: float = 20.0
 
 @export_category("Node References")
 @export var grounded_marker: RayCast3D
 @export var shadow: Sprite3D
 @export var shadow_raycast: RayCast3D
+@export var animation_player: AnimationPlayer
 
 var pid = Pid2D.new()
 
 var grounded: bool = true
 var can_move: bool = true
+var can_attack: bool = true
 
 var gravity = 0.0
 
@@ -49,7 +53,13 @@ func _physics_process(delta: float) -> void:
 		apply_central_force(force_3d * mass)
 
 	if Input.is_action_pressed("jump") and grounded:
-		apply_central_force(Vector3(0.0, JUMP_IMPULSE * mass, 0.0))
+		apply_central_force(Vector3(0.0, JUMP_FORCE * mass, 0.0))
+	
+	if Input.is_action_pressed("attack") and can_attack:
+		can_attack = false
+		animation_player.play("attack")
+		var enable_attack = func(): can_attack = true
+		get_tree().create_timer(attack_cooldown).timeout.connect(enable_attack)
 	
 	if shadow_raycast.is_colliding():
 		shadow.visible = true
@@ -84,3 +94,13 @@ func disable_movement():
 @rpc("any_peer", "call_local", "reliable")
 func enable_movement():
 	can_move = true
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body is Player:
+		var player: Player = body
+		var direction = player.global_position - global_position
+		direction.y = 0
+		direction = direction.normalized()
+		var impulse = direction * knockback_impulse
+		player.apply_impulse_to.rpc_id(player.get_multiplayer_authority(), impulse)
