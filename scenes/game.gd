@@ -5,9 +5,9 @@ extends Node3D
 
 var game_started: bool = false
 
-var total_players: int = 0
+var alive_players: Array[Player]
 
-signal game_over()
+signal game_over(winner: String)
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
@@ -18,13 +18,13 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		player.apply_teleport.rpc_id(player.get_multiplayer_authority(), spawn_position.global_position)
 		if game_started:
 			player.disable_gravity.rpc_id(player.get_multiplayer_authority())
-			total_players -= 1
-			if total_players <= 1:
-				reset_game()
+			alive_players.erase(player)
+			if len(alive_players) <= 1:
+				reset_game(alive_players[0].username.text)
 
 
-func reset_game() -> void:
-	game_over.emit()
+func reset_game(winner: String) -> void:
+	game_over.emit(winner)
 	for node in spawn_position.get_children():
 		if node is not Player: continue
 		var player: Player = node
@@ -40,7 +40,7 @@ func _on_game_ui_start_game() -> void:
 
 	game_started = true
 	MultiplayerHandler.tube_client.refuse_new_connections = true
-	total_players = 0
+	alive_players = []
 
 	var players = spawn_position.get_children()
 	for i in range(len(players)):
@@ -56,7 +56,7 @@ func _on_game_ui_start_game() -> void:
 		player.apply_teleport.rpc_id.call_deferred(authority, Vector3(x, 5, z))
 		player.stop_movement.rpc_id.call_deferred(authority)
 
-		total_players += 1
+		alive_players.append(player)
 
 
 func _on_game_ui_countdown_finished() -> void:

@@ -3,6 +3,7 @@ extends CanvasLayer
 
 @export var start_game_button: Button
 @export var countdown_label: RichTextLabel
+@export var game_over_label: RichTextLabel
 
 
 signal start_game()
@@ -24,6 +25,7 @@ func check_start_button(_id = 0) -> void:
 		start_game_button.visible = true
 
 
+@rpc("any_peer", "call_local", "reliable")
 func start_countdown() -> void:
 	start_game_button.visible = false
 
@@ -42,9 +44,20 @@ func start_countdown() -> void:
 
 func _on_button_pressed() -> void:
 	start_game.emit()
-	start_countdown()
+	start_countdown.rpc()
 
 
-func _on_map_game_over() -> void:
-	if multiplayer.is_server():
-		start_game_button.visible = true
+func _on_map_game_over(winner: String) -> void:
+	start_game_button.visible = true
+	game_over.rpc(winner)
+
+@rpc("any_peer", "call_local", "reliable")
+func game_over(winner: String) -> void:
+	game_over_label.text = "Game Over!\n" + winner + " won"
+	game_over_label.visible = true
+	await get_tree().create_timer(5.0).timeout
+	game_over_label.visible = false
+
+
+func _on_game_over_gui_input(_event: InputEvent) -> void:
+	game_over_label.visible = false

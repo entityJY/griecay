@@ -57,6 +57,9 @@ properties/3/replication_mode = 2
 properties/4/path = NodePath("Attack/Area3D:monitorable")
 properties/4/spawn = true
 properties/4/replication_mode = 2
+properties/5/path = NodePath("Username:text")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 length = 0.001

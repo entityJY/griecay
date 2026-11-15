@@ -11,7 +11,7 @@ var usernames: Dictionary[int, String]
 
 func _ready() -> void:
 	tube_client.peer_connected.connect(set_initial_username)
-	tube_client.peer_disconnected.connect(set_initial_username)
+	tube_client.peer_disconnected.connect(remove_user_name)
 	tube_client.session_created.connect(set_initial_username)
 
 func start_server() -> String:
@@ -33,3 +33,6 @@ func set_initial_username(id: int = 1) -> void:
 func update_user_name(id: int, username: String) -> void:
 	if MultiplayerHandler.tube_client.session_id != "" and multiplayer.is_server():
 		usernames[id] = username
+
+func remove_user_name(id: int) -> void:
+	usernames.erase(id)

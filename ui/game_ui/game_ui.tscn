@@ -4,10 +4,11 @@
 [ext_resource type="FontFile" uid="uid://dkectsfpmvfa7" path="res://fonts/Radis Sans.otf" id="2_6u1yh"]
 [ext_resource type="FontFile" uid="uid://edt050f38l2s" path="res://fonts/Matcha Squishy.otf" id="3_xlhta"]
 
-[node name="GameUI" type="CanvasLayer" unique_id=875937728 node_paths=PackedStringArray("start_game_button", "countdown_label")]
+[node name="GameUI" type="CanvasLayer" unique_id=875937728 node_paths=PackedStringArray("start_game_button", "countdown_label", "game_over_label")]
 script = ExtResource("1_5rq5h")
 start_game_button = NodePath("StartGame")
 countdown_label = NodePath("Countdown")
+game_over_label = NodePath("GameOver")
 
 [node name="Countdown" type="RichTextLabel" parent="." unique_id=639708106]
 visible = false
@@ -30,6 +31,22 @@ text = "Start!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="GameOver" type="RichTextLabel" parent="." unique_id=1565062440]
+visible = false
+custom_minimum_size = Vector2(1024, 256)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("2_6u1yh")
+theme_override_font_sizes/normal_font_size = 128
+text = "Game Over!
+username won"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="StartGame" type="Button" parent="." unique_id=642095128]
 visible = false
 custom_minimum_size = Vector2(440, 0)
@@ -46,4 +63,5 @@ theme_override_font_sizes/font_size = 64
 text = "Start Game
 "
 
+[connection signal="gui_input" from="GameOver" to="." method="_on_game_over_gui_input"]
 [connection signal="pressed" from="StartGame" to="." method="_on_button_pressed"]
