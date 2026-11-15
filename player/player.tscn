@@ -40,10 +40,6 @@ fill_to = Vector2(0.5, 1)
 height = 1.0
 radius = 1.5
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u5x38"]
-radius = 0.4
-height = 1.8
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_oul6g"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
@@ -155,6 +151,7 @@ axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_paxxb")
 gravity_scale = 2.0
 script = ExtResource("1_rkbax")
+JUMP_FORCE = 320.0
 PID_CONSTANTS = Vector3(30, 0, 0.2)
 grounded_marker = NodePath("Grounded")
 shadow = NodePath("ShadowStuff/Shadow")
@@ -201,11 +198,6 @@ shape = SubResource("CylinderShape3D_pr5yw")
 transform = Transform3D(1.5, 0, 0, 0, -6.556708e-08, -1.5, 0, 1.5, -6.556708e-08, 0, 0, 0)
 visible = false
 sprite_frames = ExtResource("2_rkbax")
-
-[node name="Hitbox" type="Area3D" parent="." unique_id=1363619370]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=538896354]
-shape = SubResource("CapsuleShape3D_u5x38")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1656757232]
 replication_config = SubResource("SceneReplicationConfig_oul6g")

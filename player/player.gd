@@ -3,7 +3,7 @@ class_name Player
 
 
 @export var TARGET_SPEED: float = 5.0
-@export var JUMP_FORCE: float = 10.0
+@export var JUMP_FORCE: float = 320.0
 @export var MAX_FORCE: float = 40.0
 @export var PID_CONSTANTS: Vector3 = Vector3(1.0, 0.0, 0.0)
 @export var attack_cooldown: float = 1.0
@@ -50,11 +50,11 @@ func _physics_process(delta: float) -> void:
 		var force = pid.update(velocity_error, delta)
 		var force_3d = Vector3(force.x, 0.0, force.y).limit_length(MAX_FORCE)
 
+		if Input.is_action_pressed("jump") and grounded:
+			force_3d.y = JUMP_FORCE * mass
+		
 		apply_central_force(force_3d * mass)
-
-	if Input.is_action_pressed("jump") and grounded:
-		apply_central_force(Vector3(0.0, JUMP_FORCE * mass, 0.0))
-	
+		
 	if Input.is_action_pressed("attack") and can_attack:
 		can_attack = false
 		animation_player.play("attack")
