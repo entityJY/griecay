@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://cidiygumf8a8x"]
 
 [ext_resource type="Script" uid="uid://brvgw7wv0i2jq" path="res://ui/multiplayer_ui/high_level_ui.gd" id="1_nvtjh"]
+[ext_resource type="FontFile" uid="uid://edt050f38l2s" path="res://fonts/Matcha Squishy.otf" id="2_cbblj"]
+[ext_resource type="Script" uid="uid://bsys8l27c8y55" path="res://scripts/text_edit_stop_focus.gd" id="2_uf0np"]
+
+[sub_resource type="Theme" id="Theme_mxk8o"]
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("2_cbblj")
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("2_cbblj")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvtjh"]
 bg_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
@@ -11,8 +19,10 @@ session_id_button = NodePath("MarginContainer/VBoxContainer/SessionID")
 input_session_id = NodePath("MarginContainer/VBoxContainer/JoinSessionID")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1103238524]
+custom_minimum_size = Vector2(300, 0)
 offset_right = 40.0
 offset_bottom = 40.0
+focus_mode = 1
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -21,29 +31,39 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2051655689]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme = SubResource("Theme_mxk8o")
 theme_override_constants/separation = 16
 
 [node name="SessionID" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1579250358]
-custom_minimum_size = Vector2(0, 31)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 tooltip_text = "Press to copy session code"
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_nvtjh")
 
 [node name="CreateLobby" type="Button" parent="MarginContainer/VBoxContainer" unique_id=583428171]
 layout_mode = 2
+focus_mode = 0
 text = "Create Lobby"
 
 [node name="JoinSessionID" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=88985796]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("2_cbblj")
+theme_override_font_sizes/font_size = 32
 placeholder_text = "Enter Code"
 alignment = 1
+script = ExtResource("2_uf0np")
 
 [node name="Client" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1255092702]
 layout_mode = 2
+focus_mode = 0
 text = "Join Lobby"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1357654742]
 layout_mode = 2
+focus_mode = 0
 text = "Quit Lobby"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SessionID" to="." method="_on_session_id_pressed"]

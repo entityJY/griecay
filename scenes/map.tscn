@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://bncgv81nbrm7x"]
 
+[ext_resource type="Script" uid="uid://lpun4t0jexpc" path="res://scenes/game.gd" id="1_2klcf"]
 [ext_resource type="PackedScene" uid="uid://brx160r6hot4f" path="res://scenes/tiles.tscn" id="1_4xfga"]
 [ext_resource type="PackedScene" uid="uid://d1vx7w8xhf6ou" path="res://player/player.tscn" id="2_paxxb"]
 [ext_resource type="PackedScene" uid="uid://cidiygumf8a8x" path="res://ui/multiplayer_ui/high_level_ui.tscn" id="3_gldc4"]
 [ext_resource type="Script" uid="uid://itrkgxdyvug7" path="res://scripts/multiplayer_spawner.gd" id="4_0cso3"]
+[ext_resource type="PackedScene" uid="uid://tuwvppwudrd8" path="res://ui/game_ui/game_ui.tscn" id="6_2lpho"]
 
-[node name="Map" type="Node3D" unique_id=1947027435]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0cso3"]
+size = Vector3(50, 1, 50)
+
+[node name="Map" type="Node3D" unique_id=1947027435 node_paths=PackedStringArray("spawn_position")]
+script = ExtResource("1_2klcf")
+spawn_position = NodePath("Players")
 
 [node name="Tiles" parent="." unique_id=478190446 instance=ExtResource("1_4xfga")]
 initial_radius = 10
@@ -14,14 +21,28 @@ initial_radius = 10
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5357056, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=197334690]
-transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 10, 8.401003)
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 40, 38.5)
 projection = 1
 size = 27.168
 
 [node name="HighLevelUi" parent="." unique_id=779017857 instance=ExtResource("3_gldc4")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=384066555]
-_spawnable_scenes = PackedStringArray("uid://d1vx7w8xhf6ou")
+_spawnable_scenes = PackedStringArray("uid://d1vx7w8xhf6ou", "uid://c2yw8mpnbyyow")
 spawn_path = NodePath("../Players")
 script = ExtResource("4_0cso3")
 network_player = ExtResource("2_paxxb")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=949862517]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1901581245]
+shape = SubResource("BoxShape3D_0cso3")
+
+[node name="GameUI" parent="." unique_id=875937728 instance=ExtResource("6_2lpho")]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="countdown_finished" from="GameUI" to="." method="_on_game_ui_countdown_finished"]
+[connection signal="start_game" from="GameUI" to="." method="_on_game_ui_start_game"]

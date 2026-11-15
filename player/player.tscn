@@ -15,20 +15,43 @@ gradient = SubResource("Gradient_kqu6x")
 width = 96
 height = 192
 
+[sub_resource type="Gradient" id="Gradient_oul6g"]
+interpolation_mode = 1
+colors = PackedColorArray(0, 0, 0, 0.43529412, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qjkh3"]
+gradient = SubResource("Gradient_oul6g")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_oul6g"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("ShadowStuff/Shadow:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:gravity_scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
-[node name="Player" type="RigidBody3D" unique_id=1553416751 node_paths=PackedStringArray("grounded_marker")]
+[node name="Player" type="RigidBody3D" unique_id=1553416751 node_paths=PackedStringArray("grounded_marker", "shadow", "shadow_raycast")]
+collision_layer = 4
+collision_mask = 5
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_paxxb")
 gravity_scale = 2.0
 script = ExtResource("1_rkbax")
+JUMP_IMPULSE = 340.0
 PID_CONSTANTS = Vector3(30, 0, 0.2)
 grounded_marker = NodePath("Grounded")
+shadow = NodePath("ShadowStuff/Shadow")
+shadow_raycast = NodePath("ShadowStuff/ShadowRaycast")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1062491462]
 shape = SubResource("CapsuleShape3D_pr5yw")
@@ -37,8 +60,18 @@ shape = SubResource("CapsuleShape3D_pr5yw")
 texture = SubResource("GradientTexture2D_oul6g")
 
 [node name="Grounded" type="RayCast3D" parent="." unique_id=1050679996]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.93863153, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
 target_position = Vector3(0, -0.15, 0)
+
+[node name="ShadowStuff" type="Node3D" parent="." unique_id=1106522861]
+
+[node name="Shadow" type="Sprite3D" parent="ShadowStuff" unique_id=157279040]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -1, 0)
+texture = SubResource("GradientTexture2D_qjkh3")
+
+[node name="ShadowRaycast" type="RayCast3D" parent="ShadowStuff" unique_id=45436885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96, 0)
+target_position = Vector3(0, -10, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1656757232]
 replication_config = SubResource("SceneReplicationConfig_oul6g")

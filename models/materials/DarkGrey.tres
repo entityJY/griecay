@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://baji1wb8p4yp8"]
+
+[resource]
+resource_name = "DarkGrey"
+cull_mode = 2
+albedo_color = Color(0.31961212, 0.2849901, 0.28886193, 1)
+roughness = 0.5
+stencil_mode = 3
+stencil_flags = 2

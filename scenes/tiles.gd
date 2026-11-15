@@ -13,13 +13,11 @@ var hex_grid: Dictionary[Vector2, Node]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# var origin = hex_model.instantiate()
-	# self.add_child(origin)
-	# hex_grid[Vector3(0, 0, 0)] = origin
-
-	generate_hex_grid(initial_radius)
+	if multiplayer.is_server():
+		generate_hex_grid(initial_radius)
 
 func generate_hex_grid(radius: int) -> void:
+	if !multiplayer.is_server(): return
 	for q in range(-radius, radius + 1):
 		var r1 = maxf(-radius, -q - radius)
 		var r2 = minf(radius, -q + radius)
