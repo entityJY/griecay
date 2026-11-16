@@ -60,6 +60,12 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath("Username:text")
 properties/5/spawn = true
 properties/5/replication_mode = 1
+properties/6/path = NodePath("Sprite3D2:modulate")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("Username:modulate")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 length = 0.001
@@ -146,7 +152,7 @@ _data = {
 &"attack": SubResource("Animation_rkbax")
 }
 
-[node name="Player" type="RigidBody3D" unique_id=1553416751 node_paths=PackedStringArray("grounded_marker", "shadow", "shadow_raycast", "animation_player", "username")]
+[node name="Player" type="RigidBody3D" unique_id=1553416751 node_paths=PackedStringArray("grounded_marker", "shadow", "shadow_raycast", "animation_player", "username", "color_sprite")]
 collision_layer = 4
 collision_mask = 5
 axis_lock_angular_x = true
@@ -161,6 +167,7 @@ shadow = NodePath("ShadowStuff/Shadow")
 shadow_raycast = NodePath("ShadowStuff/ShadowRaycast")
 animation_player = NodePath("AnimationPlayer")
 username = NodePath("Username")
+color_sprite = NodePath("Sprite3D2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1062491462]
 shape = SubResource("CapsuleShape3D_pr5yw")

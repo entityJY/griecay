@@ -9,12 +9,18 @@ class_name Player
 @export var attack_cooldown: float = 1.0
 @export var knockback_impulse: float = 20.0
 
+@export var dash_impulse: float = 10.0
+@export var dash_cooldown: float = 2.0
+var num_dashes: int = 1
+var max_dashes: int = 1
+
 @export_category("Node References")
 @export var grounded_marker: RayCast3D
 @export var shadow: Sprite3D
 @export var shadow_raycast: RayCast3D
 @export var animation_player: AnimationPlayer
 @export var username: Label3D
+@export var color_sprite: Sprite3D
 
 var pid = Pid2D.new()
 
@@ -28,6 +34,7 @@ var gravity = 0.0
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 	PlayerData.set_multiplayer_authority(name.to_int())
+	update_colors(PlayerData.color)
 
 
 func _ready() -> void:
@@ -36,6 +43,7 @@ func _ready() -> void:
 
 	update_username_label(PlayerData.username)
 	PlayerData.username_changed.connect(update_username_label)
+	PlayerData.color_changed.connect(update_colors)
 
 
 func _physics_process(delta: float) -> void:
@@ -59,6 +67,11 @@ func _physics_process(delta: float) -> void:
 			force_3d.y = jump_force * mass
 		
 		apply_central_force(force_3d * mass)
+
+		if Input.is_action_just_pressed("dash") and num_dashes > 0:
+			apply_central_impulse(dash_impulse * Vector3(direction.x, 0.1, direction.y).normalized())
+			num_dashes -= 1
+			regen_dash()
 		
 	if Input.is_action_pressed("attack") and can_attack:
 		can_attack = false
@@ -72,8 +85,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		shadow.visible = false
 
+func regen_dash() -> void:
+	await get_tree().create_timer(dash_cooldown).timeout
+	if num_dashes < max_dashes:
+		num_dashes += 1
+	if num_dashes < max_dashes:
+		regen_dash()
+
 func update_username_label(new_name: String) -> void:
 	username.text = new_name
+
+func update_colors(new_color) -> void:
+	color_sprite.modulate = new_color
+	username.modulate = new_color
 
 @rpc("any_peer", "call_local", "reliable")
 func apply_teleport(target_pos: Vector3) -> void:

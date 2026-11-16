@@ -26,7 +26,7 @@ bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 script = ExtResource("1_nvtjh")
 session_id_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/SessionID")
 input_session_id = NodePath("PanelContainer/MarginContainer/VBoxContainer/JoinSessionID")
-user_name_edit = NodePath("PanelContainer/MarginContainer/VBoxContainer/LineEdit")
+user_name_edit = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=885615338]
 offset_left = 20.0
@@ -49,11 +49,21 @@ layout_mode = 2
 theme = SubResource("Theme_mxk8o")
 theme_override_constants/separation = 16
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=988769788]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=692253540]
 layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=988769788]
+layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "Username"
 alignment = 1
 script = ExtResource("2_uf0np")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1874852936]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+focus_mode = 0
+color = Color(1, 1, 1, 1)
 
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=409807618]
 layout_mode = 2
@@ -101,7 +111,8 @@ layout_mode = 2
 focus_mode = 0
 text = "Quit Lobby"
 
-[connection signal="text_submitted" from="PanelContainer/MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="color_changed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/SessionID" to="." method="_on_session_id_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CreateLobby" to="." method="_on_server_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Client" to="." method="_on_client_pressed"]

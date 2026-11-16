@@ -29,3 +29,7 @@ func _on_session_id_pressed() -> void:
 
 func _on_line_edit_text_changed(new_text: String) -> void:
 	PlayerData.username = new_text
+
+
+func _on_color_picker_button_color_changed(color: Color) -> void:
+	PlayerData.color = color

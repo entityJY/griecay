@@ -18,6 +18,9 @@ const POWER_UPS: Dictionary[int, String] = {
 	2: "Movement Speed Up",
 	3: "Knockback Up",
 	4: "Jump Force Up",
+	5: "Additional Dashes",
+	6: "Decrease Dash Cooldown",
+	7: "Increase Dash Distance",
 }
 
 
@@ -48,7 +51,7 @@ func set_power(power_id: int) -> void:
 	visible = false
 	match power_id:
 		0:
-			player.attack_cooldown *= .8
+			player.attack_cooldown *= .9
 			return
 		1:
 			player.mass *= 1.5
@@ -62,6 +65,16 @@ func set_power(power_id: int) -> void:
 			return
 		4:
 			player.jump_force *= 1.25
+			return
+		5:
+			player.max_dashes += 1
+			player.num_dashes = player.max_dashes
+			return
+		6:
+			player.dash_cooldown *= .9
+			return
+		7:
+			player.dash_impulse *= 1.1
 			return
 		_:
 			print("error")

@@ -12,3 +12,11 @@ var username: String:
 @rpc("any_peer", "call_local", "reliable")
 func send_username() -> void:
     MultiplayerHandler.update_user_name.rpc_id(1, MultiplayerHandler.tube_client.peer_id, username)
+
+
+signal color_changed(new_color: Color)
+
+var color: Color:
+    set(new_color):
+        color = new_color
+        color_changed.emit(new_color)
