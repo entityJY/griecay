@@ -2,6 +2,7 @@ extends Node3D
 
 
 @export var spawn_position: Node3D
+@export var tiles: Tiles
 
 var game_started: bool = false
 
@@ -26,6 +27,9 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 func reset_game(winner: Player) -> void:
 	game_over.emit(winner.username.text)
 	MultiplayerHandler.increment_score(winner.get_multiplayer_authority(), 1)
+
+	tiles.tiles_falling = false
+	tiles.reset_tiles.call_deferred()
 
 	for node in spawn_position.get_children():
 		if node is not Player: continue
@@ -71,3 +75,6 @@ func _on_game_ui_countdown_finished() -> void:
 		var authority = player.get_multiplayer_authority()
 		player.enable_movement.rpc_id(authority)
 		player.enable_gravity.rpc_id(authority)
+	
+	tiles.tiles_falling = true
+	tiles.drop_tiles()
