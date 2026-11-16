@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://brvgw7wv0i2jq" path="res://ui/multiplayer_ui/high_level_ui.gd" id="1_nvtjh"]
 [ext_resource type="FontFile" uid="uid://edt050f38l2s" path="res://fonts/Matcha Squishy.otf" id="2_cbblj"]
 [ext_resource type="Script" uid="uid://bsys8l27c8y55" path="res://scripts/text_edit_stop_focus.gd" id="2_uf0np"]
+[ext_resource type="FontFile" uid="uid://dkectsfpmvfa7" path="res://fonts/Radis Sans.otf" id="4_y34rg"]
 
 [sub_resource type="Theme" id="Theme_mxk8o"]
 Button/font_sizes/font_size = 32
@@ -63,6 +64,7 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 tooltip_text = "Press to copy session code"
 focus_mode = 0
+theme_override_fonts/font = ExtResource("4_y34rg")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nvtjh")
 text = "Lobby ID"
 
