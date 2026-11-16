@@ -21,10 +21,11 @@ thickness = 8
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvtjh"]
 bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 
-[node name="HighLevelUi" type="CanvasLayer" unique_id=763348940 node_paths=PackedStringArray("session_id_button", "input_session_id")]
+[node name="HighLevelUi" type="CanvasLayer" unique_id=763348940 node_paths=PackedStringArray("session_id_button", "input_session_id", "user_name_edit")]
 script = ExtResource("1_nvtjh")
 session_id_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/SessionID")
 input_session_id = NodePath("PanelContainer/MarginContainer/VBoxContainer/JoinSessionID")
+user_name_edit = NodePath("PanelContainer/MarginContainer/VBoxContainer/LineEdit")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=885615338]
 offset_left = 20.0

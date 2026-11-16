@@ -3,6 +3,11 @@ extends CanvasLayer
 
 @export var session_id_button: Button
 @export var input_session_id: LineEdit
+@export var user_name_edit: LineEdit
+
+
+func _ready() -> void:
+	user_name_edit.text = PlayerData.username
 
 
 func _on_server_pressed() -> void:

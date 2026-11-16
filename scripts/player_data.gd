@@ -11,4 +11,4 @@ signal username_changed(new_name)
 
 @rpc("any_peer", "call_local", "reliable")
 func send_username() -> void:
-    MultiplayerHandler.update_user_name.rpc_id(1, get_multiplayer_authority(), username)
+    MultiplayerHandler.update_user_name.rpc_id(1, MultiplayerHandler.tube_client.peer_id, username)

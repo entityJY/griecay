@@ -20,15 +20,18 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 			player.disable_gravity.rpc_id(player.get_multiplayer_authority())
 			alive_players.erase(player)
 			if len(alive_players) <= 1:
-				reset_game(alive_players[0].username.text)
+				reset_game(alive_players[0])
 
 
-func reset_game(winner: String) -> void:
-	game_over.emit(winner)
+func reset_game(winner: Player) -> void:
+	game_over.emit(winner.username.text)
+	MultiplayerHandler.increment_score(winner.get_multiplayer_authority(), 1)
+
 	for node in spawn_position.get_children():
 		if node is not Player: continue
 		var player: Player = node
 
+		MultiplayerHandler.tube_client.refuse_new_connections = false
 		var authority = player.get_multiplayer_authority()
 		player.enable_movement.rpc_id(authority)
 		player.enable_gravity.rpc_id(authority)
