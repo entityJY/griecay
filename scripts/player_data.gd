@@ -3,7 +3,7 @@ extends Node
 
 signal username_changed(new_name)
 
-@export var username: String:
+var username: String:
     set(new_name):
         username = new_name
         username_changed.emit(new_name)

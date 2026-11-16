@@ -3,6 +3,7 @@ extends Node3D
 
 @export var spawn_position: Node3D
 @export var tiles: Tiles
+@export var game_ui: GameUI
 
 var game_started: bool = false
 
@@ -30,6 +31,8 @@ func reset_game(winner: Player) -> void:
 
 	tiles.tiles_falling = false
 	tiles.reset_tiles.call_deferred()
+
+	game_ui.power_up_selector.offer_power_up.rpc()
 
 	for node in spawn_position.get_children():
 		if node is not Player: continue

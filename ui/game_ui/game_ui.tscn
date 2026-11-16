@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dkectsfpmvfa7" path="res://fonts/Radis Sans.otf" id="2_6u1yh"]
 [ext_resource type="FontFile" uid="uid://edt050f38l2s" path="res://fonts/Matcha Squishy.otf" id="3_xlhta"]
 [ext_resource type="PackedScene" uid="uid://sjhx5i26qex1" path="res://ui/game_ui/score_ui.tscn" id="4_adpq5"]
+[ext_resource type="Script" uid="uid://dbfi4xeb8x3uo" path="res://ui/game_ui/powerup_selector.gd" id="5_bkjh4"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_xlhta"]
 color = Color(0.13333334, 0.13333334, 0.13333334, 1)
@@ -15,13 +16,14 @@ bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adpq5"]
 bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 
-[node name="GameUI" type="CanvasLayer" unique_id=875937728 node_paths=PackedStringArray("start_game_button", "countdown_label", "game_over_label", "score_board_container")]
+[node name="GameUI" type="CanvasLayer" unique_id=875937728 node_paths=PackedStringArray("start_game_button", "countdown_label", "game_over_label", "score_board_container", "power_up_selector")]
 script = ExtResource("1_5rq5h")
 score_ui_element = ExtResource("4_adpq5")
 start_game_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/StartGame")
 countdown_label = NodePath("Countdown")
 game_over_label = NodePath("GameOver")
 score_board_container = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FoldableContainer/MarginContainer/VScrollBar/VBoxContainer")
+power_up_selector = NodePath("PowerupSelector")
 
 [node name="Countdown" type="RichTextLabel" parent="." unique_id=639708106]
 visible = false
@@ -127,5 +129,37 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
+[node name="PowerupSelector" type="HBoxContainer" parent="." unique_id=1652373837 node_paths=PackedStringArray("button1", "button2")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("5_bkjh4")
+button1 = NodePath("CenterContainer/Option1")
+button2 = NodePath("CenterContainer2/Option2")
+
+[node name="CenterContainer" type="CenterContainer" parent="PowerupSelector" unique_id=125357112]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Option1" type="Button" parent="PowerupSelector/CenterContainer" unique_id=74419483]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6u1yh")
+theme_override_font_sizes/font_size = 48
+
+[node name="CenterContainer2" type="CenterContainer" parent="PowerupSelector" unique_id=1690118955]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Option2" type="Button" parent="PowerupSelector/CenterContainer2" unique_id=893238334]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6u1yh")
+theme_override_font_sizes/font_size = 48
+
 [connection signal="gui_input" from="GameOver" to="." method="_on_game_over_gui_input"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/StartGame" to="." method="_on_button_pressed"]
+[connection signal="button_down" from="PowerupSelector/CenterContainer/Option1" to="PowerupSelector" method="_select_power_1"]
+[connection signal="button_down" from="PowerupSelector/CenterContainer2/Option2" to="PowerupSelector" method="_select_power_2"]

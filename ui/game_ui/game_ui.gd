@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name GameUI
 
 
 @export var score_ui_element: PackedScene
@@ -7,6 +8,7 @@ extends CanvasLayer
 @export var countdown_label: RichTextLabel
 @export var game_over_label: RichTextLabel
 @export var score_board_container: VBoxContainer
+@export var power_up_selector: PowerUpSelector
 
 var score_ui_element_array: Array[ScoreUI]
 
