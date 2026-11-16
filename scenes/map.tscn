@@ -10,6 +10,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_0cso3"]
 size = Vector3(50, 1, 50)
 
+[sub_resource type="Environment" id="Environment_yvo0u"]
+background_mode = 1
+
 [node name="Map" type="Node3D" unique_id=1947027435 node_paths=PackedStringArray("spawn_position")]
 script = ExtResource("1_2klcf")
 spawn_position = NodePath("Players")
@@ -42,6 +45,9 @@ collision_mask = 4
 shape = SubResource("BoxShape3D_0cso3")
 
 [node name="GameUI" parent="." unique_id=875937728 instance=ExtResource("6_2lpho")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=184901286]
+environment = SubResource("Environment_yvo0u")
 
 [connection signal="game_over" from="." to="GameUI" method="_on_map_game_over"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

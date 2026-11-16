@@ -3,7 +3,7 @@
 [resource]
 resource_name = "LightGrey"
 cull_mode = 2
+shading_mode = 0
 albedo_color = Color(0.5298621, 0.5760021, 0.5981142, 1)
-roughness = 0.5
 stencil_mode = 3
 stencil_flags = 2

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c2yw8mpnbyyow"]
 
-[ext_resource type="PackedScene" uid="uid://biewu07hgmrly" path="res://models/hex_tile.glb" id="1_3dk36"]
+[ext_resource type="ArrayMesh" uid="uid://bagmgoa6g85dd" path="res://models/hex_tile.tres" id="1_3dk36"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3dk36"]
 properties/0/path = NodePath(".:position")
@@ -9,11 +9,12 @@ properties/0/replication_mode = 1
 
 [node name="Tile" type="StaticBody3D" unique_id=1952567825]
 
-[node name="hex_tile" parent="." unique_id=1105811724 instance=ExtResource("1_3dk36")]
-
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=149519785]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 polygon = PackedVector2Array(0, 1, 0.865, 0.5, 0.865, -0.5, 0, -1, -0.865, -0.5, -0.865, 0.5)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1774534534]
 replication_config = SubResource("SceneReplicationConfig_3dk36")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1252571934]
+mesh = ExtResource("1_3dk36")
