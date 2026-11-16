@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://brvgw7wv0i2jq" path="res://ui/multiplayer_ui/high_level_ui.gd" id="1_nvtjh"]
 [ext_resource type="FontFile" uid="uid://edt050f38l2s" path="res://fonts/Matcha Squishy.otf" id="2_cbblj"]
 [ext_resource type="Script" uid="uid://bsys8l27c8y55" path="res://scripts/text_edit_stop_focus.gd" id="2_uf0np"]
-[ext_resource type="FontFile" uid="uid://dkectsfpmvfa7" path="res://fonts/Radis Sans.otf" id="4_y34rg"]
 
 [sub_resource type="Theme" id="Theme_mxk8o"]
 Button/font_sizes/font_size = 32
@@ -18,6 +17,27 @@ color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 grow_begin = 10.0
 grow_end = 10.0
 thickness = 8
+
+[sub_resource type="FontFile" id="FontFile_w2u7p"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvtjh"]
 bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
@@ -74,7 +94,7 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 tooltip_text = "Press to copy session code"
 focus_mode = 0
-theme_override_fonts/font = ExtResource("4_y34rg")
+theme_override_fonts/font = SubResource("FontFile_w2u7p")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nvtjh")
 text = "Lobby ID"
 
@@ -91,7 +111,7 @@ theme_override_styles/separator = SubResource("StyleBoxLine_pr5yw")
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 focus_mode = 1
-theme_override_fonts/font = ExtResource("2_cbblj")
+theme_override_fonts/font = SubResource("FontFile_w2u7p")
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Enter Code"
 alignment = 1
